@@ -1,8 +1,8 @@
 import streamlit as st
 
-#Sidebar
+# Sidebar
 st.sidebar.markdown("Clicked Page 5")
 
-#Page
+# Page
 st.title("Page 5")
-
+picture = st.camera_input("Take a picture")
