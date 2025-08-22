@@ -2,7 +2,6 @@ from myLLM.MyApi import openAiModelArg, makeMsg, openAiModel
 
 
 def test(prompt):
-
     promptMp3 = "prompt.mp3"
     model = openAiModel()
     response = model.audio.speech.create(
@@ -12,7 +11,6 @@ def test(prompt):
         response_format="mp3",
         speed=1.1,
     )
-
     response.stream_to_file(promptMp3)
 
     modelName = "gpt-4o"
@@ -30,7 +28,6 @@ def test(prompt):
         response_format="mp3",
         speed=1.1,
     )
-
     response.stream_to_file(resultMp3)
 
 if __name__ == "__main__":
