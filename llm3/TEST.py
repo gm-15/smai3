@@ -4,7 +4,7 @@ import time
 import streamlit as st
 from PIL import Image
 
-from myLLM import geminiModel, save_uploadedfile, progressBar
+from MyLLM import geminiModel, save_uploadedfile, progressBar
 
 # Sidebar
 st.sidebar.markdown("Clicked Page 2")
@@ -22,7 +22,7 @@ if file:
         img = Image.open("img/"+file.name)
         model = geminiModel()
         my_bar = progressBar("Operation in progress. Please wait.")
-        response = model.generate_content( [text , img] )
+        response = model.generate_content( [ text , img ] )
         my_bar.empty()
         st.info(response.text)
 
