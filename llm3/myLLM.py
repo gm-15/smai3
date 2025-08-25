@@ -108,3 +108,17 @@ def makeImage(prompt,name):
     print(image_url)
     imgName = "img/"+name
     urllib.request.urlretrieve(image_url, imgName)
+
+def cloneImage(imgName, num):
+    openModel = openAiModel()
+    response = openModel.images.create_variation(
+        model="dall-e-2",
+        image=open("img/"+imgName, "rb"),
+        n=num,
+        size="1024x1024"
+    )
+    for n,data in enumerate(response.data):
+        print(n)
+        print(data.url)
+        name = f"img/{imgName.split('.')[0]}_clone_{n}.png"
+        urllib.request.urlretrieve(data.url, name)
