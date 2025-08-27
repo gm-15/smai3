@@ -1,7 +1,7 @@
 import streamlit as st
 from PIL import Image
-from myLLM import save_uploadedfile, openAiModel, progressBar, encode_image
-from myLLM import makeAudio
+
+from myllm import save_uploadedfile, openAiModel, progressBar, encode_image, makeAudio
 
 # Sidebar
 st.sidebar.markdown("Clicked Page 9")
@@ -41,5 +41,14 @@ if file:
 # 결과를 출력하고
 # 음성으로 안내한다
         st.info(response.choices[0].message.content)
-        makeAudio(response.choices[0].message.content, "result2.mp3")
-        st.audio("audio/result2.mp3", autoplay=True)
+        makeAudio(response.choices[0].message.content, "imgresult.mp3")
+        st.audio("audio/imgresult.mp3", autoplay=True, width=1)
+
+
+
+
+
+
+
+
+

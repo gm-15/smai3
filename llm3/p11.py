@@ -1,7 +1,7 @@
 import streamlit as st
 from PIL import Image
 
-from myLLM import save_uploadedfile, makeImage, progressBar
+from myllm import save_uploadedfile, makeImage, progressBar
 
 # Sidebar
 st.sidebar.markdown("Clicked Page 11")
@@ -18,9 +18,10 @@ if st.button("SEND"):
         my_bar = progressBar("Operation in progress. Please wait.")
         makeImage(text, name)
         my_bar.empty()
+
         with open("img/"+name, "rb") as file:
             st.download_button(
-                label="Download image",
+                label=f"Download image: {name}",
                 data=file,
                 file_name="img/" + name,
                 mime="image/png",

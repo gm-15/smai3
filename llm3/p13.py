@@ -1,7 +1,7 @@
 import streamlit as st
 from PIL import Image
 
-from myLLM import save_uploadedfile, cloneImage, progressBar
+from myllm import save_uploadedfile, cloneImage, progressBar
 
 # Sidebar
 st.sidebar.markdown("Clicked Page 13")

@@ -2,17 +2,17 @@ import base64
 import time
 import urllib
 
-import streamlit as st
-
-from openai import OpenAI
 import google.generativeai as genai
 from dotenv import load_dotenv
 import os
+import streamlit as st
+from openai import OpenAI
 
 load_dotenv()
 
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
-GOOGLE_API_KEY=os.getenv("GOOGLE_API_KEY")
+GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
+#GOOGLE_API_KEY = st.secrets["GOOGLE_API_KEY"]
 
 def openAiModel():
     client = OpenAI(api_key=OPENAI_API_KEY)
@@ -34,6 +34,7 @@ def openAiModelArg(model, msgs):
         messages=msgs
     )
     return response.choices[0].message.content
+
 
 def geminiModel():
     genai.configure(api_key=GOOGLE_API_KEY)
@@ -77,7 +78,6 @@ def progressBar(txt):
     return my_bar
     # Progress Bar End -----------------------------------------
 
-
 def makeAudio(text, name):
     if not os.path.exists("audio"):
         os.makedirs("audio")
@@ -85,17 +85,21 @@ def makeAudio(text, name):
     response = model.audio.speech.create(
         model="tts-1",
         input=text,
-        voice="alloy",
+        #["alloy", "echo", "fable", "onyx", "nova", "shimmer"],
+        voice="echo",
         response_format="mp3",
-        speed=1.1,
+        speed=1.2,
     )
     response.stream_to_file("audio/"+name)
+
 
 def encode_image(image_path):
     with open(image_path, "rb") as image_file:
         return base64.b64encode(image_file.read()).decode("utf-8")
 
-def makeImage(prompt,name):
+def makeImage(prompt, name):
+    if not os.path.exists("img"):
+        os.makedirs("img")
     openModel = openAiModel()
     response = openModel.images.generate(
         model="dall-e-3",
@@ -107,9 +111,27 @@ def makeImage(prompt,name):
     image_url = response.data[0].url
     print(image_url)
     imgName = "img/"+name
-    urllib.request.urlretrieve(image_url, imgName)
+    urllib.request.urlretrieve(image_url,  imgName)
+
+def makeImages(prompt, name, num):
+    if not os.path.exists("img"):
+        os.makedirs("img")
+    openModel = openAiModel()
+    response = openModel.images.generate(
+        model="dall-e-2",
+        prompt=prompt,
+        size="1024x1024",
+        n=num,
+    )
+    for n,data in enumerate(response.data):
+        print(n)
+        print(data.url)
+        imgname = f"img/{name.split('.')[0]}_{n}.png"
+        urllib.request.urlretrieve(data.url, imgname)
 
 def cloneImage(imgName, num):
+    if not os.path.exists("img"):
+        os.makedirs("img")
     openModel = openAiModel()
     response = openModel.images.create_variation(
         model="dall-e-2",

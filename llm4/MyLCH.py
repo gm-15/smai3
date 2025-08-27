@@ -10,11 +10,12 @@ load_dotenv()
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 GOOGLE_API_KEY=os.getenv("GOOGLE_API_KEY")
 
+# OpenAI LLM Model
 def getOpenAI():
-    llm = ChatOpenAI(temperature=0, model_name='gpt-4o')
+    llm = ChatOpenAI(temperature=1, model_name='gpt-4o')
     return llm
 
-
+# Gemini LLM Model
 def getGenAI():
     llm = ChatGoogleGenerativeAI(
         model="gemini-1.5-flash",

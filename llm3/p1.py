@@ -2,7 +2,7 @@ import time
 
 import streamlit as st
 
-from myLLM import geminiTxt, progressBar
+from myllm import geminiTxt, progressBar
 
 # Sidebar
 st.sidebar.markdown("Clicked Page 1")
@@ -19,3 +19,7 @@ if st.button("SEND"):
         st.info(result)
     else:
         st.info("질문을 입력 하세요")
+
+
+
+

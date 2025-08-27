@@ -1,7 +1,6 @@
 import urllib
 
-from myLLM.MyApi import openAiModel
-
+from myllm.MyApi import openAiModelArg, makeMsg, openAiModel
 
 def test(prompt):
     openModel = openAiModel()
@@ -11,13 +10,12 @@ def test(prompt):
         n=3,
         size="1024x1024"
     )
-    for n, data in enumerate(response.data):
+    for n,data in enumerate(response.data):
         print(n)
         print(data.url)
-        name = f"img/dogcat_clone_{n}.png"
+        name = f"img/dogncat_clone_{n}.png"
         urllib.request.urlretrieve(data.url, name)
 
-
-if __name__ == "__main__":
-    prompt = "img/dogcat.png"
+if __name__ == '__main__':
+    prompt = "img/dogncat.png"
     test(prompt)

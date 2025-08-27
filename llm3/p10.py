@@ -1,24 +1,21 @@
 import streamlit as st
-from PIL import Image
-from myLLM import save_uploadedfile, openAiModel, progressBar, encode_image, save_carpturefile
-from myLLM import makeAudio
+
+from myllm import save_carpturefile, encode_image, openAiModel, progressBar, makeAudio
 
 # Sidebar
 st.sidebar.markdown("Clicked Page 10")
 
 # Page
 st.title("Page 10")
+
 picture = st.camera_input("Take a picture")
 if picture:
-    st.info("이미지를 캡쳐했습니다")
-    save_carpturefile("capture", picture,"temp_p10.png",st)
+    st.info("이미지를 캡쳐 했습니다.")
+    save_carpturefile("capture", picture, "capturetemp.png", st)
+    text = st.text_area(label="질문입력:",  placeholder="질문을 입력 하세요")
 
-# 이미지에 대한 질문을 한다.
-    text = st.text_area(label="질문입력:",
-                        placeholder="질문을 입력 하세요")
-# OpenAI에게 물어 본다.
     if st.button("SEND"):
-        base64img = encode_image("capture/temp_p10.png")
+        base64img = encode_image("capture/capturetemp.png")
         model = openAiModel()
         my_bar = progressBar("Operation in progress. Please wait.")
         response = model.chat.completions.create(
@@ -28,7 +25,7 @@ if picture:
                 {"role": "user", "content": [
                     {"type": "text", "text": text},
                     {"type": "image_url", "image_url": {
-                        "url": f"data:image/png;base64,{base64img}"}
+                        "url": f"data:image/jpg;base64,{base64img}"}
                      }
                 ]}
             ],
@@ -36,8 +33,14 @@ if picture:
         )
         my_bar.empty()
 
-# 결과를 출력하고
-# 음성으로 안내한다
+        # 결과를 출력하고
+        # 음성으로 안내한다
         st.info(response.choices[0].message.content)
-        makeAudio(response.choices[0].message.content, "result_p10.mp3")
-        st.audio("audio/result_p10.mp3", autoplay=True)
+        makeAudio(response.choices[0].message.content, "img_capture_result.mp3")
+        st.audio("audio/img_capture_result.mp3", autoplay=True, width=1)
+
+
+
+
+
+

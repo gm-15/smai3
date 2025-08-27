@@ -1,7 +1,7 @@
 import streamlit as st
 from PIL import Image
 
-from myLLM import save_uploadedfile, progressBar, makeImage
+from myllm import save_uploadedfile, progressBar, makeImages
 
 # Sidebar
 st.sidebar.markdown("Clicked Page 12")
@@ -21,7 +21,7 @@ if st.button("SEND"):
     if text and name and num:
         st.info(text)
         my_bar = progressBar("Operation in progress. Please wait.")
-        makeImage(text, name, num)
+        makeImages(text, name, num)
         my_bar.empty()
 
 

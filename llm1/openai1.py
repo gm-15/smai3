@@ -1,11 +1,8 @@
-from myLLM.MyApi import openAiModel, openAiModelArg, makeMsg
-
+from myllm.MyApi import openAiModelArg, makeMsg
 
 def test():
-    model = openAiModel()
-    response = openAiModelArg("gpt-4o", makeMsg("한국 선생님","천안 안서동의 맛집 알려줘"))
+    response = openAiModelArg("gpt-4o",
+                              makeMsg("한국 선생님","천안에 맛집 알려줘"))
     print(response)
-
-
-if __name__ == "__main__":
+if __name__ == '__main__':
     test()

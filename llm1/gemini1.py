@@ -1,31 +1,19 @@
-from myLLM.MyApi import geminiModel
-import google.generativeai as genai
-from dotenv import load_dotenv
-import os
+from myllm.MyApi import geminiModel
 
-def test(user_message):
+def test(txt):
     model = geminiModel()
-    load_dotenv()
-    chat = model.start_chat(history=[])
-    response = chat.send_message(user_message)
-    print("Gemini:", response.text)
+    response = model.generate_content(txt)
+    return response.text
 
-
-if __name__ == "__main__":
-    # while True:
-    #     txt = input("질문을 입력하세요(q)")
-    #     if txt =="q":
-    #         break
-    #     result = test(txt)
-    #     print(result)
-    print("\n--- Gemini 챗봇 시작 ---")
-
+if __name__ == '__main__':
     while True:
-        user_message = input("나: ")
-        if user_message.lower() == '종료':
+        txt = input(" 질문을 입력 하세요 (q)")
+        if txt == "q":
             break
-        test(user_message)
-    print("--- 챗봇 종료 ---")
+        result = test(txt)
+        print(result)
+
+
 
 
 

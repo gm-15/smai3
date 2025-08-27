@@ -1,7 +1,6 @@
 import urllib
 
-from myLLM.MyApi import openAiModel
-
+from myllm.MyApi import openAiModelArg, makeMsg, openAiModel
 
 def test(prompt):
     openModel = openAiModel()
@@ -14,9 +13,9 @@ def test(prompt):
     )
     image_url = response.data[0].url
     print(image_url)
-    imgName = "img/dogcat.png"
-    urllib.request.urlretrieve(image_url, imgName)
+    imgName = "img/dogncat.png"
+    urllib.request.urlretrieve(image_url,  imgName)
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     prompt = "갈색 강아지와 흰색 고양이 사진 만들어줘"
     test(prompt)

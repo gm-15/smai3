@@ -1,12 +1,12 @@
-from myLLM.MyApi import openAiModelArg, makeMsg
+from myllm.MyApi import openAiModelArg, makeMsg
 
 
 def test(prompt):
-    modelName = "gpt-4o"
-    msg = makeMsg("너는 무서운 한국어 선생님",prompt)
+    modelName = "gpt-5"
+    msg = makeMsg("너는 친절한 한국어 선생님",prompt)
     result = openAiModelArg(modelName, msg)
     print(result)
 
-if __name__ == "__main__":
-    prompt = "와칸다의 수도가 어디야"
+if __name__ == '__main__':
+    prompt = "갤럭시 s25 알려줘?"
     test(prompt)
